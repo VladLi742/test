@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="container">
+      {% for array in php_array %}
+      {% if array.status_of_work == true %}
+        <div class="grid-item">
+          <div class="inner-item inner-item-hover" id="{{array.id}}">
+            <div class="image-block">
+              <a href="https://www.livemaster.ru/item/{{array.id}}-{{array.link_on_work}}">
+                <img width="175" height="175" src="{{array.src}}" alt="Картины и панно ручной работы. Ярмарка Мастеров - ручная работа {{array.title}}. Handmade.">
+              </a>
+              <span class="btn-hover-open-viewer" data-id="{{array.id}}">
+                <span class="btn-hover-open-viewer-icon"></span>
+                <span class="btn-hover-open-viewer-text">Увеличить</span>
+              </span>
+              <i id="toggle-fav-{{array.id}}" class="icon-favorite" title="Добавить в Избранное"></i>
+            </div>
+            <div class="title"><a href="https://www.livemaster.ru/item/{{array.id}}-{{array.link_on_work}}" title="{{array.title}}">{{array.title}}</a></div>
+            <div class="author"><a href="https://www.livemaster.ru/{{array.link_on_shop}}" title="{{array.name_of_master}} | {{array.link_on_shop}}.livemaster.ru">{{array.name_of_master}}</a></div>
+            <div class="cost">
+              <span class="price" >{{array.price}}&nbsp;
+                <span title="Выбор валюты">руб</span>
+              </span>
+              <i class="tobasket">
+                <a title="Положить в корзину работу {{array.title}}">В корзину</a>
+              </i>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+  </body>
+</html>
