@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Публичная часть сайта</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="container">
+        <section class="container__selects">
+            <legend>
+                Что показать?
+                <select class="js-choice">
+                    <option value="" style="display: none;"></option>
+                    <option value="active-category">Активные категории</option>
+                    <option value="active-good">Активные товары</option>
+                    <option value="good-by-id">Полное описание товара по id</option>
+                </select>
+            </legend>
+            <section class="js-container-enter-id container-enter-id">
+                <label>Введите id:
+                    <input type="text" class="container-enter-id__input_field">
+                </label>
+                <button class="check-id">Найти товар</button>
+            </section>
+        </section>
+        <section class="js-content content"></section>
+    </section>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
