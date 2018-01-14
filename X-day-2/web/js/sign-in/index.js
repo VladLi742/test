@@ -3,7 +3,7 @@ $(window).on('load',function(){
         var text = $('#users-name').val();
         var name = /\w|\d|[,.!?;:()]/g;
         var checkText = name.test(text);
-        if (!checkText) {
+        if (checkText) {
             alert('не валидное имя');
         }
     });

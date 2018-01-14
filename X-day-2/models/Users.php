@@ -41,6 +41,7 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'email', 'password', 'imageFile'], 'required'],
             [['avatar'], 'string'],
             [['admin'], 'integer'],
             [['name'], 'string', 'max' => 64],
