@@ -96,7 +96,7 @@ abstract class Application extends Module
     /**
      * @var string the application name.
      */
-    public $name = '<<Будь здоров!>>';
+    public $name = '&laquo;Будь Здоров!&raquo;';
     /**
      * @var string the charset currently used for the application.
      */

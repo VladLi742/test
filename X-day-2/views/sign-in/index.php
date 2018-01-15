@@ -2,10 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-//\app\assets\AppAsset::register($this);
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\User */
 /* @var $form ActiveForm */
 ?>
 <div class="sign-in-index">
@@ -15,6 +14,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'name')->label('ФИО') ?>
         <?= $form->field($model, 'email')->label('E-mail')->input('email') ?>
         <?= $form->field($model, 'password')->label('Пароль')->input('password') ?>
+        <?= $form->field($model, 'password_repeat')->label('Подтверждение пароля')->input('password') ?>
         <?= $form->field($model, 'imageFile')->label('Загрузить аватар')->fileInput() ?>
     
         <div class="form-group">

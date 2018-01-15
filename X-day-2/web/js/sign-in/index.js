@@ -8,14 +8,14 @@ $(window).on('load',function(){
         }
     });
 
-    $('#users-email').on('change', function() {
-        var text = $('#users-email').val();
-        var email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        var checkText = email.test(text);
-        if (!checkText) {
-            alert('не валидный email');
-        }
-    });
+    // $('#users-email').on('change', function() {
+    //     var text = $('#users-email').val();
+    //     var email = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    //     var checkText = email.test(text);
+    //     if (!checkText) {
+    //         alert('не валидный email');
+    //     }
+    // });
 
     $('#users-password').on('change', function() {
         var text = $('#users-password').val();

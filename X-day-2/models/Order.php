@@ -10,11 +10,11 @@ use Yii;
  * @property int $id
  * @property string $date
  *
- * @property Doctors $id0
- * @property Specialities $id1
- * @property Users $id2
+ * @property Doctor $id0
+ * @property Speciality $id1
+ * @property User $id2
  */
-class Orders extends \yii\db\ActiveRecord
+class Order extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -31,9 +31,9 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'safe'],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctors::className(), 'targetAttribute' => ['id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Specialities::className(), 'targetAttribute' => ['id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -53,7 +53,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getId0()
     {
-        return $this->hasOne(Doctors::className(), ['id' => 'id']);
+        return $this->hasOne(Doctor::className(), ['id' => 'id']);
     }
 
     /**
@@ -61,7 +61,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getId1()
     {
-        return $this->hasOne(Specialities::className(), ['id' => 'id']);
+        return $this->hasOne(Speciality::className(), ['id' => 'id']);
     }
 
     /**
@@ -69,6 +69,6 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getId2()
     {
-        return $this->hasOne(Users::className(), ['id' => 'id']);
+        return $this->hasOne(User::className(), ['id' => 'id']);
     }
 }

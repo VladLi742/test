@@ -11,13 +11,13 @@ use Yii;
  * @property string $name
  * @property int $fired
  *
- * @property Specialities $id0
- * @property Orders $orders
- * @property Specialities[] $ids
- * @property Users[] $ids0
- * @property Specialities $specialities
+ * @property Speciality $id0
+ * @property Order $orders
+ * @property Speciality[] $ids
+ * @property User[] $ids0
+ * @property Speciality $specialities
  */
-class Doctors extends \yii\db\ActiveRecord
+class Doctor extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -35,7 +35,7 @@ class Doctors extends \yii\db\ActiveRecord
         return [
             [['fired'], 'integer'],
             [['name'], 'string', 'max' => 64],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Specialities::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -56,7 +56,7 @@ class Doctors extends \yii\db\ActiveRecord
      */
     public function getId0()
     {
-        return $this->hasOne(Specialities::className(), ['id' => 'id']);
+        return $this->hasOne(Speciality::className(), ['id' => 'id']);
     }
 
     /**
@@ -64,7 +64,7 @@ class Doctors extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasOne(Orders::className(), ['id' => 'id']);
+        return $this->hasOne(Order::className(), ['id' => 'id']);
     }
 
     /**
@@ -72,7 +72,7 @@ class Doctors extends \yii\db\ActiveRecord
      */
     public function getIds()
     {
-        return $this->hasMany(Specialities::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
+        return $this->hasMany(Speciality::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
     }
 
     /**
@@ -80,7 +80,7 @@ class Doctors extends \yii\db\ActiveRecord
      */
     public function getIds0()
     {
-        return $this->hasMany(Users::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
+        return $this->hasMany(User::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
     }
 
     /**
@@ -88,6 +88,6 @@ class Doctors extends \yii\db\ActiveRecord
      */
     public function getSpecialities()
     {
-        return $this->hasOne(Specialities::className(), ['id' => 'id']);
+        return $this->hasOne(Speciality::className(), ['id' => 'id']);
     }
 }

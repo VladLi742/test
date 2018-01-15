@@ -38,12 +38,12 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-//            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Главная', 'url' => ['/site/']],
 //            ['label' => 'About', 'url' => ['/site/about']],
-           ['label' => 'Contact', 'url' => ['/site/contact']],
-                ['label' => 'Регистрация', 'url' => ['/sign-in/']],
-                ['label' => 'Зайти в личный кабинет', 'url' => ['/site/log-in']],
-                ['label' => 'Личный кабинет', 'url' => ['/site/personal_account']],
+            ['label' => 'Доктора', 'url' => ['/doctor/']],
+            ['label' => 'Регистрация', 'url' => ['/sign-in/']],
+            ['label' => 'Зайти в личный кабинет', 'url' => ['/site/log-in']],
+//            ['label' => 'Личный кабинет', 'url' => ['/site/personal_account']],
         //    Yii::$app->user->isGuest ? (
         //        ['label' => 'Login', 'url' => ['/site/login']]
         //    ) : (

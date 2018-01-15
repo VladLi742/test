@@ -7,11 +7,9 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1><<Будь Здоров!>></h1>
+        <h1>&laquo;Будь Здоров!&raquo;</h1>
 
-        <button class="btn btn-lg btn-success">
-            <a href="http://www.yiiframework.com">Записаться к врачу</a>
-        </button>
+        <?= \yii\helpers\Html::a('Записаться к врачу', ['/doctor/'], ['class'=>'btn btn-lg btn-success']); ?>
     </div>
 <!---->
 <!--    <div class="body-content">-->

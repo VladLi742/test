@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Users;
+use app\models\User;
 use yii\web\UploadedFile;
 use Faker\Factory;
 
@@ -19,7 +19,7 @@ class SignInController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        $model = new \app\models\Users();
+        $model = new \app\models\User();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -36,7 +36,7 @@ class SignInController extends \yii\web\Controller
 
     public function actionUpload()
     {
-        $model = new Users();
+        $model = new User();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
