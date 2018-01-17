@@ -8,12 +8,9 @@ use Yii;
  * This is the model class for table "specialities".
  *
  * @property int $id
+ * @property string $name
  *
- * @property Doctor $doctors
- * @property Order $orders
- * @property Doctor[] $ids
- * @property User[] $ids0
- * @property Doctor $id0
+ * @property Doctor[] $doctors
  */
 class Speciality extends \yii\db\ActiveRecord
 {
@@ -31,7 +28,7 @@ class Speciality extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['id' => 'id']],
+            [['name'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,6 +39,7 @@ class Speciality extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
         ];
     }
 
@@ -50,38 +48,6 @@ class Speciality extends \yii\db\ActiveRecord
      */
     public function getDoctors()
     {
-        return $this->hasOne(Doctor::className(), ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOrders()
-    {
-        return $this->hasOne(Order::className(), ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIds()
-    {
-        return $this->hasMany(Doctor::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIds0()
-    {
-        return $this->hasMany(User::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getId0()
-    {
-        return $this->hasOne(Doctor::className(), ['id' => 'id']);
+        return $this->hasMany(Doctor::className(), ['id_speciality' => 'id']);
     }
 }

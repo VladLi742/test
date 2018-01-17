@@ -9,7 +9,9 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="sign-in-index">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+            'options' => ['enctype'=>'multipart/form-data'],
+    ]); ?>
 
         <?= $form->field($model, 'name')->label('ФИО') ?>
         <?= $form->field($model, 'email')->label('E-mail')->input('email') ?>

@@ -8,11 +8,12 @@ use Yii;
  * This is the model class for table "orders".
  *
  * @property int $id
+ * @property int $id_doctor
+ * @property int $id_user
  * @property string $date
  *
- * @property Doctor $id0
- * @property Speciality $id1
- * @property User $id2
+ * @property Doctor $doctor
+ * @property User $user
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -30,10 +31,10 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['id_doctor', 'id_user'], 'integer'],
             [['date'], 'safe'],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id' => 'id']],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id_doctor'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['id_doctor' => 'id']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
         ];
     }
 
@@ -44,6 +45,8 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'id_doctor' => Yii::t('app', 'Id Doctor'),
+            'id_user' => Yii::t('app', 'Id User'),
             'date' => Yii::t('app', 'Date'),
         ];
     }
@@ -51,24 +54,16 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getDoctor()
     {
-        return $this->hasOne(Doctor::className(), ['id' => 'id']);
+        return $this->hasOne(Doctor::className(), ['id' => 'id_doctor']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getId1()
+    public function getUser()
     {
-        return $this->hasOne(Speciality::className(), ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getId2()
-    {
-        return $this->hasOne(User::className(), ['id' => 'id']);
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 }

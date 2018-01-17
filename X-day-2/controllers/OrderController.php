@@ -2,18 +2,17 @@
 
 namespace app\controllers;
 
-use app\models\Speciality;
 use Yii;
-use app\models\Doctor;
-use yii\data\ActiveDataProvider;
+use app\models\Order;
+use app\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DoctorController implements the CRUD actions for Doctor model.
+ * OrderController implements the CRUD actions for Order model.
  */
-class DoctorController extends Controller
+class OrderController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,24 +30,25 @@ class DoctorController extends Controller
     }
 
     /**
-     * Lists all Doctor models.
+     * Lists all Order models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Doctor::find(),
-        ]);
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Doctor model.
+     * Displays a single Order model.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
@@ -58,28 +58,29 @@ class DoctorController extends Controller
     }
 
     /**
-     * Creates a new Doctor model.
+     * Creates a new Order model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Doctor();
+        $model = new Order();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Doctor model.
+     * Updates an existing Order model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
@@ -87,18 +88,19 @@ class DoctorController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Deletes an existing Doctor model.
+     * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -108,18 +110,18 @@ class DoctorController extends Controller
     }
 
     /**
-     * Finds the Doctor model based on its primary key value.
+     * Finds the Order model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Doctor the loaded model
+     * @return Order the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Doctor::findOne($id)) !== null) {
+        if (($model = Order::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 }

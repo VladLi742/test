@@ -16,7 +16,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <!--    <p>-->
 <!--        --><?//= Html::a(Yii::t('app', 'Create Doctor'), ['create'], ['class' => 'btn btn-success']) ?>
 <!--    </p>-->
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             [
@@ -30,11 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
             [
-                'attribute' => 'id_speciality',
+                'attribute' => 'speciality',
+                'value' => 'speciality.name',
                 'label' => 'Профессия',
 
             ],
-            'fired',
+            [
+                'attribute' => 'fired',
+                'label' => 'Уже не работает',
+            ],
         ],
     ]); ?>
+
 <?php Pjax::end(); ?></div>

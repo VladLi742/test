@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\User;
 use yii\web\UploadedFile;
-use Faker\Factory;
 
 class SignInController extends \yii\web\Controller
 {
@@ -24,7 +23,9 @@ class SignInController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 // form inputs are valid, do something here
-                return;
+                return $this->refresh();
+            } else {
+
             }
         }
 

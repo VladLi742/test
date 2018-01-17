@@ -8,14 +8,12 @@ use Yii;
  * This is the model class for table "doctors".
  *
  * @property int $id
+ * @property int $id_speciality
  * @property string $name
  * @property int $fired
  *
- * @property Speciality $id0
- * @property Order $orders
- * @property Speciality[] $ids
- * @property User[] $ids0
- * @property Speciality $specialities
+ * @property Speciality $speciality
+ * @property Order[] $orders
  */
 class Doctor extends \yii\db\ActiveRecord
 {
@@ -33,9 +31,9 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fired'], 'integer'],
+            [['id_speciality', 'fired'], 'integer'],
             [['name'], 'string', 'max' => 64],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id' => 'id']],
+            [['id_speciality'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id_speciality' => 'id']],
         ];
     }
 
@@ -46,6 +44,7 @@ class Doctor extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'id_speciality' => Yii::t('app', 'Id Speciality'),
             'name' => Yii::t('app', 'Name'),
             'fired' => Yii::t('app', 'Fired'),
         ];
@@ -54,9 +53,9 @@ class Doctor extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getSpeciality()
     {
-        return $this->hasOne(Speciality::className(), ['id' => 'id']);
+        return $this->hasOne(Speciality::className(), ['id' => 'id_speciality']);
     }
 
     /**
@@ -64,30 +63,6 @@ class Doctor extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasOne(Order::className(), ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIds()
-    {
-        return $this->hasMany(Speciality::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getIds0()
-    {
-        return $this->hasMany(User::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSpecialities()
-    {
-        return $this->hasOne(Speciality::className(), ['id' => 'id']);
+        return $this->hasMany(Order::className(), ['id_doctor' => 'id']);
     }
 }
