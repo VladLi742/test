@@ -38,24 +38,30 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Главная', 'url' => ['/site/']],
-//            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Доктора', 'url' => ['/doctor/']],
-            ['label' => 'Регистрация', 'url' => ['/sign-in/']],
-            ['label' => 'Зайти в личный кабинет', 'url' => ['/site/log-in']],
-//            ['label' => 'Личный кабинет', 'url' => ['/site/personal_account']],
-        //    Yii::$app->user->isGuest ? (
-        //        ['label' => 'Login', 'url' => ['/site/login']]
-        //    ) : (
-        //        '<li>'
-        //        . Html::beginForm(['/site/logout'], 'post')
-        //        . Html::submitButton(
-        //            'Logout (' . Yii::$app->user->identity->username . ')',
-        //            ['class' => 'btn btn-link logout']
-        //        )
-        //        . Html::endForm()
-        //        . '</li>'
-        //    )
+            Yii::$app->request->url == '/' ? (
+                ['label' => 'Доктора', 'url' => ['/doctor/']]
+            ) : (
+                ['label' => 'Главная', 'url' => ['/site/']]
+            ),
+            Yii::$app->user->isGuest ? (
+                ['label' => 'Регистрация', 'url' => ['/sign-in/']]
+            ) : (
+                '<li>'
+                . Html::beginForm(['/site/logout'], 'post')
+                . Html::submitButton(
+                    'Logout (' . Yii::$app->user->id . ')',
+                    ['class' => 'btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>'
+            ),
+             Yii::$app->user->isGuest ? (
+                ['label' => 'Зайти в личный кабинет', 'url' => ['/log-in/']]
+            ) : (
+                '<li>'.
+                'dsa'
+                . '</li>'
+            ),
         ],
     ]);
     NavBar::end();

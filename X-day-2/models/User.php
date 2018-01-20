@@ -2,29 +2,25 @@
 
 namespace app\models;
 
-use Yii;
-use yii\web\UploadedFile;
-use yii\validators\ImageValidator;
+use yii\db\ActiveRecord;
+use yii\web\IdentityInterface;
 
-/**
- * This is the model class for table "users".
- *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string $avatar
- * @property int $admin
- *
- * @property Order $orders
- * @property Doctor[] $ids
- * @property Speciality[] $ids0
- */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
+    public $name;
+    public $email;
+    public $password;
 
-    public $imageFile;
-    public $password_repeat;
+    public function rules()
+    {
+        return [
+            [['name', 'email', 'password'], 'required',],
+            'name' => [['name'], 'string', 'max' => 64],
+            'email' => [['email'], 'string', 'max' => 32],
+            'password' => [['password'], 'string', 'min' => 6, 'max' => 32],
+            ['email', 'email'],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -35,69 +31,53 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * Finds an identity by the given ID.
+     *
+     * @param string|int $id the ID to be looked for
+     * @return IdentityInterface|null the identity object that matches the given ID.
      */
-    public function rules()
+    public static function findIdentity($id)
     {
-        return [
-            [['name', 'email', 'password', 'password_repeat', 'imageFile'], 'required'],
-            'avatar' => [['avatar'], 'string'],
-            'admin' => [['admin'], 'integer'],
-            'name' => [['name'], 'string', 'max' => 64],
-            'email' => [['email'], 'string', 'max' => 32],
-            'password' => [['password'], 'string', 'max' => 32],
-            'password_repeat' => ['password_repeat', 'compare', 'compareAttribute'=>'password'],
-            'imageFile' => [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png'],
-            ['email', 'email'],
-        ];
+        return static::findOne($id);
     }
 
     /**
-     * @inheritdoc
+     * Finds an identity by the given token.
+     *
+     * @param string $token the token to be looked for
+     * @return IdentityInterface|null the identity object that matches the given token.
      */
-    public function attributeLabels()
+    public static function findIdentityByAccessToken($token, $type = null)
     {
-        return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'email' => Yii::t('app', 'Email'),
-            'password' => Yii::t('app', 'Password'),
-            'avatar' => Yii::t('app', 'Avatar'),
-            'admin' => Yii::t('app', 'Admin'),
-        ];
+        return static::findOne(['email' => $token]);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return int|string current user ID
      */
-    public function getOrders()
+    public function getId()
     {
-        return $this->hasOne(Order::className(), ['id' => 'id']);
+        return $this->id;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return string current user auth key
      */
-    public function getIds()
+    public function getAuthKey()
     {
-        return $this->hasMany(Doctor::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
+        return $this->auth_key;
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @param string $authKey
+     * @return bool if auth key is valid for current user
      */
-    public function getIds0()
+    public function validateAuthKey($authKey)
     {
-        return $this->hasMany(Speciality::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
+        return $this->getAuthKey() === $authKey;
     }
 
-    public function upload()
-    {
-        if ($this->validate()) {
-            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
+    static function findByEmail($email) {
+        return User::findOne(['email' => $email]);
     }
 }
