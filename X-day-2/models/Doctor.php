@@ -31,9 +31,12 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_speciality', 'fired'], 'integer'],
+            [['name', 'id_speciality'], 'required'],
+            [['fired'], 'boolean'],
+            [['id_speciality'], 'string'],
             [['name'], 'string', 'max' => 64],
             [['id_speciality'], 'exist', 'skipOnError' => true, 'targetClass' => Speciality::className(), 'targetAttribute' => ['id_speciality' => 'id']],
+            ['name', 'match', 'pattern' => '/^(\W+) (\W+) (\W+)?(!\d|[,.!?;:()]?)+$/', 'message' => 'ФИО должно содержать только кириллицу, пробелы, без цифр и знаков препинания'],
         ];
     }
 
@@ -43,10 +46,8 @@ class Doctor extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'id_speciality' => Yii::t('app', 'Id Speciality'),
-            'name' => Yii::t('app', 'Name'),
-            'fired' => Yii::t('app', 'Fired'),
+            'id_speciality' => 'Специальность',
+            'name' => 'ФИО',
         ];
     }
 
@@ -64,5 +65,17 @@ class Doctor extends \yii\db\ActiveRecord
     public function getOrders()
     {
         return $this->hasMany(Order::className(), ['id_doctor' => 'id']);
+    }
+
+    public function freeDate($date)
+    {
+        $freeDate = Order::find()
+                ->where(['date' => $date, 'id_doctor' => '1'])
+                ->count();
+        if ($freeDate == 5) {
+            $freeDate = false;
+        }
+
+        return $freeDate;
     }
 }

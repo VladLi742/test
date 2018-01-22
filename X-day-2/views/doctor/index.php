@@ -4,9 +4,10 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
+/* @var $searchModel app\models\DoctorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Doctors');
+$this->title = 'Доктора';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctor-index">
@@ -20,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+//        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'name',
@@ -32,15 +34,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ],
             [
-                'attribute' => 'speciality',
-                'value' => 'speciality.name',
+                'attribute' => 'speciality.name',
                 'label' => 'Профессия',
 
             ],
             [
-                'attribute' => 'fired',
-                'label' => 'Уже не работает',
-            ],
+                'header' => 'Запись по интернету',
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{appointment}',
+                'buttons' => [
+                    'appointment' => function($url, $model, $key) {
+                        return Html::a('Записаться к врачу', ["doctor/{$model->id}"], ['class' => 'btn btn-success btn-block']);
+                    }
+                ]
+            ]
         ],
     ]); ?>
 

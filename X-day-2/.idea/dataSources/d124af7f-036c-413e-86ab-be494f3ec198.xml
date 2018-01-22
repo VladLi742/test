@@ -133,11 +133,11 @@
     </column>
     <column id="37" parent="11" name="password">
       <Position>4</Position>
-      <DataType>char(32)|0</DataType>
+      <DataType>char(60)|0</DataType>
     </column>
     <column id="38" parent="11" name="avatar">
       <Position>5</Position>
-      <DataType>text|0</DataType>
+      <DataType>char(64)|0</DataType>
     </column>
     <column id="39" parent="11" name="admin">
       <Position>6</Position>

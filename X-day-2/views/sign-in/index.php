@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $signInForm app\models\SignInForm */
-/* @var $uploadForm app\models\UploadForm */
 /* @var $form ActiveForm */
 ?>
 
@@ -34,13 +33,11 @@ use yii\widgets\ActiveForm;
         <?= $form->field($signInForm, 'email')->label('E-mail')->input('email') ?>
         <?= $form->field($signInForm, 'password')->label('Пароль')->input('password') ?>
         <?= $form->field($signInForm, 'password_repeat')->label('Подтверждение пароля')->input('password') ?>
-        <?= $form->field($uploadForm, 'avatar')->label('Загрузить аватар')->fileInput() ?>
+        <?= $form->field($signInForm, 'imageFile')->label('Загрузить фото')->fileInput() ?>
     
         <div class="form-group">
-            <?= Html::submitButton(Yii::t('app', 'Зарегистироваться'), ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Зарегистироваться', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
 </div>
-
-<?= $this->registerJsFile('@web/js/sign-in/index.js', ['depends' => 'yii\web\YiiAsset']);?>

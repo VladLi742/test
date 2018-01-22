@@ -22,6 +22,7 @@ use yii\db\ActiveRecord;
 class SignInForm extends ActiveRecord
 {
     public $password_repeat;
+    public $imageFile;
 
     /**
      * @inheritdoc
@@ -37,14 +38,19 @@ class SignInForm extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'password_repeat'], 'required', 'message' => Yii::t('yii', 'Feel {attribute} for finishing the registration')],
+            [['name', 'email', 'password', 'password_repeat', 'imageFile'], 'required', 'message' => Yii::t('yii', 'Feel {attribute} for finishing the registration')],
             'admin' => [['admin'], 'integer'],
             'name' => [['name'], 'string', 'max' => 64],
             'email' => [['email'], 'string', 'max' => 32],
-            'password' => [['password'], 'string', 'min' => 6, 'max' => 32],
+            'password' => [['password'], 'string', 'min' => 6, 'max' => 60],
             'password_repeat' => [['password_repeat'], 'compare', 'compareAttribute'=>'password'],
+            'imageFile' => [['imageFile'], 'file', 'skipOnEmpty' => false, 'maxSize' => '1048576', 'extensions' => 'png'],
+            'avatar' => [['avatar'], 'string', 'max' => 64],
+            ['name', 'match', 'pattern' => '/^(\W+) (\W+) (\W+)?(!\d|[,.!?;:()]?)+$/', 'message' => 'ФИО должно содержать только кириллицу, пробелы, без цифр и знаков препинания'],
             ['email', 'email'],
             ['email', 'unique'],
+            ['password', 'match', 'pattern' => '/^(?=.*[A-Z])(?=.*[a-z]).*$/', 'message' => 'Пароль должен содержать не менее 6 символов английской раскладки, верхнего и нижнего регистра'],
+
         ];
     }
 
@@ -58,8 +64,8 @@ class SignInForm extends ActiveRecord
             'name' => Yii::t('yii', 'Name'),
             'email' => Yii::t('yii', 'E-mail'),
             'password' => Yii::t('yii', 'Password'),
-            'avatar' => Yii::t('yii', 'Avatar'),
-            'admin' => Yii::t('yii', 'Admin'),
+            'password_repeat' => Yii::t('yii', 'Password_repeat'),
+            'imageFile' => Yii::t('yii', 'Image File'),
         ];
     }
 
@@ -85,5 +91,15 @@ class SignInForm extends ActiveRecord
     public function getIds0()
     {
         return $this->hasMany(Speciality::className(), ['id' => 'id'])->viaTable('orders', ['id' => 'id']);
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

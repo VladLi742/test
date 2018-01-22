@@ -14,27 +14,27 @@ class m180110_194831_create_tables extends Migration
     {
         $this->createTable('users', [
             'id' => $this->primaryKey(),
-            'name' => $this->char(64),
-            'email' => $this->char(32),
-            'password' => $this->char(32),
-            'avatar' => $this->text(),
+            'name' => $this->char(64)->notNull(),
+            'email' => $this->char(32)->notNull(),
+            'password' => $this->char(60)->notNull(),
+            'avatar' => $this->char(64)->notNull(),
             'admin' => $this->boolean(),
         ]);
         $this->createTable('specialities', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(255),
+            'name' => $this->string(255)->notNull(),
         ]);
         $this->createTable('doctors', [
             'id' => $this->primaryKey(),
             'id_speciality' => $this->integer(),
-            'name' => $this->char(64),
-            'fired' => $this->boolean(),
+            'name' => $this->char(64)->notNull(),
+            'fired' => $this->boolean()->notNull(),
         ]);
         $this->createTable('orders', [
             'id' => $this->primaryKey(),
             'id_doctor' => $this->integer(),
             'id_user' => $this->integer(),
-            'date' => $this->date(),
+            'date' => $this->date()->notNull(),
         ]);
         $this->addForeignKey('id_speciality_4_doctor', 'doctors', 'id_speciality', 'specialities', 'id');
         $this->addForeignKey('id_doctor_4_orders', 'orders', 'id_doctor','doctors', 'id');

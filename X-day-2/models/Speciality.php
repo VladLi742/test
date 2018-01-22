@@ -28,7 +28,7 @@ class Speciality extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255, 'required'],
         ];
     }
 
@@ -38,8 +38,7 @@ class Speciality extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
+            'name' => 'Специальность',
         ];
     }
 

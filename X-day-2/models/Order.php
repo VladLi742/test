@@ -44,10 +44,9 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'id_doctor' => Yii::t('app', 'Id Doctor'),
-            'id_user' => Yii::t('app', 'Id User'),
-            'date' => Yii::t('app', 'Date'),
+            'id_doctor' => 'Доктор',
+            'id_user' => 'Пациент',
+            'date' => 'Дата',
         ];
     }
 

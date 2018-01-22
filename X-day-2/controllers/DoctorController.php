@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\DoctorSearch;
+use app\models\Order;
 use app\models\Speciality;
 use Yii;
 use app\models\Doctor;
@@ -36,11 +38,11 @@ class DoctorController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Doctor::find(),
-        ]);
+        $searchModel = new DoctorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -52,8 +54,24 @@ class DoctorController extends Controller
      */
     public function actionView($id)
     {
+        $model = new Doctor();
+        $order = new Order();
+
+        if ($order->load(Yii::$app->request->post())) {
+            $order->id_user = Yii::$app->user->id;
+            $order->id_doctor = $id;
+            var_dump($model->freeDate($order->date));
+            if ($order->save()) {
+                Yii::$app->session->setFlash('success', 'Запись сделана');
+                $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('error', 'Запись не удалась');
+            }
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'order' => $order,
         ]);
     }
 

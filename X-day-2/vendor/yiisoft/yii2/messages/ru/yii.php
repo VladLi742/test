@@ -143,6 +143,7 @@ return [
     '{nFormatted} {n, plural, =1{terabyte} other{terabytes}}' => '{nFormatted} {n, plural, one{терабайт} few{терабайта} many{терабайтов} other{терабайта}}',
     'Name' => 'ФИО',
     'Password' => 'Пароль',
-    'Avatar' => 'Аватар',
+    'Password_repeat' => 'Подтверждение пароля',
+    'Image File' => 'Загрузить фото',
     'Feel {attribute} for finishing the registration' => 'Заполните {attribute} для завершения регистрации',
 ];

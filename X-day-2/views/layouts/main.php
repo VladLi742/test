@@ -59,7 +59,13 @@ AppAsset::register($this);
                 ['label' => 'Зайти в личный кабинет', 'url' => ['/log-in/']]
             ) : (
                 '<li>'.
-                'dsa'
+                Html::a("Выход", ['site/logout'], [
+                        'data' => [
+                            'method' => 'post'
+                        ],
+                        ['class' => 'white text-center']
+                    ]
+                )
                 . '</li>'
             ),
         ],

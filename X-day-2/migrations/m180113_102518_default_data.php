@@ -16,6 +16,13 @@ class m180113_102518_default_data extends Migration
                 'password' => $oFaker->password(),
             ]);
 
+        $this->insert('users',[
+            'name' => 'admin',
+            'email' => 'admin@health.ru',
+            'password' => Yii::$app->getSecurity()->generatePasswordHash('WwSsRr'),
+            'admin' => true,
+        ]);
+
         $aUsers = (new \yii\db\Query())->from('users')->all();
 
         for ($i = 1; $i <=10; $i++ )

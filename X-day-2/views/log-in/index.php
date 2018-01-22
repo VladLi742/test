@@ -11,9 +11,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'name') ?>
-        <?= $form->field($model, 'email') ?>
-        <?= $form->field($model, 'password') ?>
+        <?= $form->field($model, 'email')->label('E-mail')->input('email') ?>
+        <?= $form->field($model, 'password')->label('Пароль')->input('password') ?>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary']) ?>

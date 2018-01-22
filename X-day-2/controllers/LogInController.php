@@ -11,10 +11,14 @@ class LogInController extends \yii\web\Controller
         $model = new User();
         if ($model->load(\Yii::$app->request->post())) {
             $email = User::findByEmail($model->email);
-            $isGuest = \Yii::$app->user->isGuest;
-            if ($isGuest && $email) {
-                \Yii::$app->user->login($email);
-                return $this->refresh();
+            $hash = User::findPassword($model->password)->getAttribute('password');
+
+            if (($hash == $model->password) && $email) {
+                \Yii::$app->user->login(User::findByEmail($model->email));
+
+                return $this->redirect(['account/']);
+            } else {
+
             }
         }
 

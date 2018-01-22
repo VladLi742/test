@@ -7,15 +7,10 @@ use yii\web\IdentityInterface;
 
 class User extends ActiveRecord implements IdentityInterface
 {
-    public $name;
-    public $email;
-    public $password;
-
     public function rules()
     {
         return [
             [['name', 'email', 'password'], 'required',],
-            'name' => [['name'], 'string', 'max' => 64],
             'email' => [['email'], 'string', 'max' => 32],
             'password' => [['password'], 'string', 'min' => 6, 'max' => 32],
             ['email', 'email'],
@@ -28,6 +23,17 @@ class User extends ActiveRecord implements IdentityInterface
     public static function tableName()
     {
         return 'users';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => \Yii::t('yii', 'E-mail'),
+            'password' => \Yii::t('yii', 'Password'),
+        ];
     }
 
     /**
@@ -49,7 +55,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['email' => $token]);
+        return static::findOne(['password' => $token]);
     }
 
     /**
@@ -79,5 +85,9 @@ class User extends ActiveRecord implements IdentityInterface
 
     static function findByEmail($email) {
         return User::findOne(['email' => $email]);
+    }
+
+    static function findPassword($password) {
+        return static::findOne(['password' => $password]);
     }
 }
