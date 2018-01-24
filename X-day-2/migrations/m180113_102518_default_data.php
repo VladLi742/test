@@ -20,6 +20,7 @@ class m180113_102518_default_data extends Migration
             'name' => 'admin',
             'email' => 'admin@health.ru',
             'password' => Yii::$app->getSecurity()->generatePasswordHash('WwSsRr'),
+            'avatar' => '/uploads/user-icon.png',
             'admin' => true,
         ]);
 

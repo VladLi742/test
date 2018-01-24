@@ -12,7 +12,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['name', 'email', 'password'], 'required',],
             'email' => [['email'], 'string', 'max' => 32],
-            'password' => [['password'], 'string', 'min' => 6, 'max' => 32],
+            'password' => [['password'], 'string', 'min' => 6, 'max' => 60],
             ['email', 'email'],
         ];
     }
@@ -59,7 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return int|string current user ID
+     * @return \yii\db\ActiveQuery
      */
     public function getId()
     {

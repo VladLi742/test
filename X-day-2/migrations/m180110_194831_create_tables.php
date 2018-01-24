@@ -17,7 +17,7 @@ class m180110_194831_create_tables extends Migration
             'name' => $this->char(64)->notNull(),
             'email' => $this->char(32)->notNull(),
             'password' => $this->char(60)->notNull(),
-            'avatar' => $this->char(64)->notNull(),
+            'avatar' => $this->char(64),
             'admin' => $this->boolean(),
         ]);
         $this->createTable('specialities', [
