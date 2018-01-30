@@ -38,22 +38,12 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            Yii::$app->request->url == '/' ? (
-                ['label' => 'Доктора', 'url' => ['/doctor/']]
-            ) : (
-                ['label' => 'Главная', 'url' => ['/site/']]
-            ),
+            ['label' => 'Главная', 'url' => ['/']],
+            ['label' => 'Доктора', 'url' => ['/doctor/']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Регистрация', 'url' => ['/sign-in/']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->id . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
+                ['label' => 'Личный кабинет', 'url' => ['/account/']]
             ),
              Yii::$app->user->isGuest ? (
                 ['label' => 'Зайти в личный кабинет', 'url' => ['/log-in/']]

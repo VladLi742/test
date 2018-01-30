@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use DateTime;
 
 /**
  * LoginForm is the model behind the login form.
@@ -13,13 +14,11 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
-    public $name;
     public $email;
     public $password;
     public $rememberMe = true;
 
     private $_user = false;
-
 
     /**
      * @return array the validation rules.
@@ -27,9 +26,22 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['name', 'email', 'password'], 'required'],
+            [['email', 'password'], 'required'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
+            ['email', 'email'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'Email',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня',
         ];
     }
 
@@ -40,19 +52,19 @@ class LoginForm extends Model
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Неверный email либо пароль.');
             }
         }
     }
 
     /**
-     * Logs in a user using the provided username and password.
+     * Logs in a user using the provided name and password.
      * @return bool whether the user is logged in successfully
      */
     public function login()

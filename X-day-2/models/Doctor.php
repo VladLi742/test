@@ -67,13 +67,16 @@ class Doctor extends \yii\db\ActiveRecord
         return $this->hasMany(Order::className(), ['id_doctor' => 'id']);
     }
 
-    public function freeDate($date)
+    public function freeDate($date, $id_doctor)
     {
+        $base = 5;
         $freeDate = Order::find()
-                ->where(['date' => $date, 'id_doctor' => '1'])
-                ->count();
-        if ($freeDate == 5) {
-            $freeDate = false;
+            ->where(['date' => $date, 'id_doctor' => $id_doctor])
+            ->count();
+        if ($freeDate >= 5) {
+            $freeDate = 'нет';
+        } else {
+            $freeDate = $base - $freeDate;
         }
 
         return $freeDate;

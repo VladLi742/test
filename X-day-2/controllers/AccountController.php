@@ -14,13 +14,9 @@ class AccountController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
         $model = new User();
-        foreach (\Yii::$app->user->identity as $temp) {
-            $user[] = $temp;
-        };
 
         return $this->render('index', [
             'model' => $model,
-            'user' => $user,
         ]);
     }
 
