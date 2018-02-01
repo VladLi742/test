@@ -15,23 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if( Yii::$app->session->hasFlash('success')):?>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <?= Yii::$app->session->getFlash('success');?>
-        </div>
-    <?php endif; ?>
-    <?php if (Yii::$app->session->hasFlash('error')) :?>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <?= Yii::$app->session->getFlash('error');?>
-        </div>
-    <?php endif; ?>
-
 <!--    <p>-->
 <!--        --><?//= Html::a(Yii::t('app', 'Create Doctor'), ['create'], ['class' => 'btn btn-success']) ?>
 <!--    </p>-->
@@ -47,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content' => function($data){
                     /** @var \app\models\Doctor $data */
 
-                    return Html::a($data->name,['doctor/view', 'id'=>$data->id]);
+                    return Html::a($data->name,['doctor/view', 'id' => $data->id]);
                 }
 
             ],
@@ -79,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $condition = true;
                     }
 
-                    return Html::submitButton('Записаться к врачу', ['class' => 'btn btn-success btn-block', 'disabled' => $condition]);
+                    return Html::a('Записаться к врачу', ['doctor/confirm', 'id' => $data->id, 'date' => $date, ], ['class' => 'btn btn-success btn-block', 'disabled' => $condition]);
                 },
             ]
         ],

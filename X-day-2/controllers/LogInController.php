@@ -34,7 +34,7 @@ class LogInController extends \yii\web\Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-//        WwSsRr
+//        WwSsRr $2y$13$ox6DdOWDEkuygxaLWKg9IOytzzSvq.KKsAytDb6TYIfU5BgsSLTCO
         $model = new LoginForm();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -42,11 +42,11 @@ class LogInController extends \yii\web\Controller
 
             $hash = $identity->getAttribute('password');
             $user = $model->getUser();
-            var_dump($user->validatePassword($model->password));
-            if (Yii::$app->getSecurity()->validatePassword($model->password, $hash)) {
-//                var_dump($model);
-                if ($model->login()) {
 
+            if (Yii::$app->getSecurity()->validatePassword($model->password, $hash)) {
+                var_dump($model->login());
+                var_dump(Yii::$app->user->login($model->getUser(), $model->rememberMe ? 3600*24*30 : 0));
+                if ($model->login()) {
                     return $this->goBack();
                 }
             }

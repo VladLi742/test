@@ -36,9 +36,9 @@ class SignInController extends \yii\web\Controller
             }
 
 
-        return $this->render('index', [
-            'model' => $model,
+        return $this->render('index', [ 'model' => $model,
             'signInForm' => $signInForm,
+
         ]);
     }
 }

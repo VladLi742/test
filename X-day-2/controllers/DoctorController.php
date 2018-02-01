@@ -43,22 +43,9 @@ class DoctorController extends Controller
         $searchModel = new DoctorSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Doctor();
-        $order = new Order();
 
         if (isset($id_speciality)) {
             $dataProvider->query->where(['id_speciality' => $id_speciality]);
-        }
-
-        if ($order->load(Yii::$app->request->post())) {
-            $order->id_user = Yii::$app->user->id;
-            $order->id_doctor = $model->id;
-            $order->date = $date;
-            if ($order->save()) {
-                Yii::$app->session->setFlash('success', 'Запись сделана');
-                $this->refresh();
-            } else {
-                Yii::$app->session->setFlash('error', 'Запись не удалась');
-            }
         }
 
         return $this->render('index', [
@@ -116,31 +103,42 @@ class DoctorController extends Controller
 
     public function actionChoice()
     {
-        $model = new Doctor();
-        $order = new Order();
         $specialityForm = new SpecialityForm();
-        $searchModel = new DoctorSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if ($specialityForm->load(Yii::$app->request->post())) {
             $specialityForm->validateDate();
-//                var_dump(Order::find()->where(['id_doctor' => $specialityForm->name, 'date' => $specialityForm->date]));
                 return $this->redirect(['index',
                     'id_speciality' => $specialityForm->id,
                     'date' => $specialityForm->date,
                 ]);
-
-//            var_dump($model->freeDate($order->date));
-//            if ($specialityForm) {
-//                Yii::$app->session->setFlash('success', 'Запись сделана');
-//                $this->refresh();
-//            } else {
-//                Yii::$app->session->setFlash('error', 'Запись не удалась');
-//            }
         }
 
         return $this->render('choice', [
             'specialityForm' => $specialityForm,
+        ]);
+    }
+
+    public function actionConfirm($id = null, $date = null)
+    {
+        $model = $this->findModel($id);
+        $order = new Order();
+
+        if (Yii::$app->request->post()) {
+            $order->id_user = Yii::$app->user->id;
+            $order->id_doctor = $model->id;
+            $order->date = $date;
+
+            if ($order->save()) {
+                Yii::$app->session->setFlash('success', 'Запись сделана');
+                $this->refresh();
+            } else {
+                Yii::$app->session->setFlash('error', 'Запись не удалась');
+            }
+        }
+
+        return $this->render('confirm', [
+            'date' => $date,
+            'model' => $model,
         ]);
     }
 
