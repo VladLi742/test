@@ -65,11 +65,32 @@ class SiteController extends Controller
     }
 
     /**
+     * Sign-in action.
+     *
+     * @return string
+     */
+    public function actionSignIn()
+    {
+        $model = new \app\models\User();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+
+        return $this->render('sign-in', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Login action.
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionLogIn()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -79,7 +100,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        return $this->render('login', [
+        return $this->render('log-in', [
             'model' => $model,
         ]);
     }
@@ -115,12 +136,12 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
+     * Displays user's profile.
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionProfile()
     {
-        return $this->render('about');
+        return $this->render('profile');
     }
 }
