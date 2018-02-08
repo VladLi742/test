@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Profile';
+$this->title = 'Личный кабинет';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-profile">

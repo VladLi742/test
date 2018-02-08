@@ -4,10 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ServiceSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Services';
+$this->title = 'Панель администратора';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-index">
@@ -16,23 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <section class="center-block">
+        <p>
+            <?= Html::a('Добавить услугу', ['add-service'], ['class' => 'btn btn-success btn-lg']) ?>
+        </p>
+        <p>
+            <?= Html::a('Показать услугу', ['show-service'], ['class' => 'btn btn-success btn-lg']) ?>
+        </p>
+        <p>
+            <?= Html::a('Удалить услугу', ['delete-service'], ['class' => 'btn btn-success btn-lg']) ?>
+        </p>
+    </section>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'date',
-            'places',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
     <?php Pjax::end(); ?>
 </div>

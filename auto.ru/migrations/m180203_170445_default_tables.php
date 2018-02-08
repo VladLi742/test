@@ -14,7 +14,7 @@ class m180203_170445_default_tables extends Migration
     {
         $this->createTable('users', [
             'id' => $this->primaryKey(),
-            'name' => $this->char(32),
+            'name' => $this->char(64),
             'login' => $this->char(32),
             'email' => $this->char(32),
             'password' => $this->char(60),
@@ -24,7 +24,8 @@ class m180203_170445_default_tables extends Migration
         $this->createTable('services', [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
-            'date' => $this->date(),
+            'start_date' => $this->date(),
+            'final_date' => $this->date(),
             'places' => $this->integer(),
         ]);
 

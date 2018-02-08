@@ -9,7 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $date
+ * @property string $start_date
+ * @property string $final_date
  * @property int $places
  *
  * @property Order[] $orders
@@ -30,7 +31,7 @@ class Service extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'safe'],
+            [['start_date', 'final_date'], 'safe'],
             [['places'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -42,10 +43,10 @@ class Service extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'date' => 'Date',
-            'places' => 'Places',
+            'name' => 'Название услуги',
+            'start_date' => 'Дата начала',
+            'final_date' => 'Дата окончания',
+            'places' => 'Кол-во мест',
         ];
     }
 

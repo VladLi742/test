@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\SignInForm;
+use app\models\User;
+use yii\web\UploadedFile;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -20,12 +23,17 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout', 'profile', 'signIn', 'logIn'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'profile'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['signIn', 'logIn'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -67,16 +75,19 @@ class SiteController extends Controller
     /**
      * Sign-in action.
      *
-     * @return string
      */
     public function actionSignIn()
     {
-        $model = new \app\models\User();
+        $model = new SignInForm();
+        $user = new User();
+
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        $model->avatar = "uploads/images/{$user->login}";
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
+                Yii::$app->session->setFlash('success', 'Вы успешно зарегистрировались.');
+                return $this->redirect(['site/log-in']);
             }
         }
 
@@ -92,14 +103,16 @@ class SiteController extends Controller
      */
     public function actionLogIn()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if ($model->login === 'admin') {
+                return $this->redirect(['admin/']);
+            } else {
+                return $this->redirect(['site/profile']);
+            }
         }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
         return $this->render('log-in', [
             'model' => $model,
         ]);

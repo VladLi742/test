@@ -16,22 +16,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (Yii::$app->user->identity->login === 'admin') :?>
+        <p>
+            <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'date',
-            'places',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'name',
+                'label' => 'Услуга',
+            ],
+            [
+                'attribute' => 'date',
+                'label' => 'Дата окончания',
+            ],
+            [
+                'attribute' => 'places',
+                'label' => 'Кол-во свободных мест',
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

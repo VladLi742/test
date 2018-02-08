@@ -14,6 +14,13 @@ class m180203_170457_default_data extends Migration
     {
         $oFaker = \Faker\Factory::create('ru_RU');
 
+        $this->insert('users', [
+            'name' => 'Администратор',
+            'login' => 'admin',
+            'email' => 'admin@auto.ru',
+            'password' => 'wsr2018',
+        ]);
+
         for ($i = 1; $i <= 100; $i++) {
             $this->insert('users', [
                 'name' => $oFaker->name,
@@ -23,19 +30,13 @@ class m180203_170457_default_data extends Migration
             ]);
         }
 
-        $this->insert('users', [
-            'name' => 'Администратор',
-            'login' => 'admin',
-            'email' => 'admin@auto.ru',
-            'password' => 'wsr2018',
-        ]);
-
         $aUsers = (new \yii\db\Query())->from('users')->all();
 
         for ($i = 1; $i <= 24; $i++) {
             $this->insert('services', [
                 'name' => $oFaker->country,
-                'date' => $oFaker->date(),
+                'start_date' => $oFaker->date(),
+                'final_date' => $oFaker->date(),
                 'places' => $oFaker->randomNumber('3'),
             ]);
         }
