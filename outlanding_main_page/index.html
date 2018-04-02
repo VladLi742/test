@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OUTLANDING</title>
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,500" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header class="header">
+    <section class="header__top">
+      <h1 class="header__top__logo">Outlanding</h1>
+      <nav class="header__top__nav">
+        <ul>
+          <li>Работы</li>
+          <li>Услуги</li>
+          <li>Блог</li>
+          <li>Контакты</li>
+        </ul>
+      </nav>
+    </section>
+
+    <section class="circle">
+      <svg width="100%" height="100%" viewbox="0 0 33.83098862 33.83098862" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bkg" x1="1" x2="1" y1="0" y2="1">
+            <stop class="stop1" offset="0%" />
+            <stop class="stop2" offset="100%" />
+          </linearGradient>
+          <style type="text/css">
+            #progress-bar-inner {
+              stroke: url(#bkg);
+              stroke-width: 2;
+              stroke-dasharray: 100, 100;
+              stroke-linecap: round;
+              fill: none;
+            }
+
+            #progress-bar-outer {
+              stroke: url(#bkg);
+              stroke-width: 2;
+              stroke-dasharray: 40, 50;
+              fill: none;
+            }
+
+            #relative-strips-hours {
+              stroke: url(#bkg);
+              stroke-width: 1;
+              stroke-dasharray: 0.1, 7;
+              fill: none;
+            }
+
+            #relative-strips-minutes {
+              stroke: url(#bkg);
+              stroke-width: 0.5;
+              stroke-dasharray: 0.1, 0.8;
+              fill: none;
+            }
+
+            .stop1 {
+              stop-color: #f8d61f;
+            }
+
+            .stop2 {
+              stop-color: #6539cb;
+            }
+          </style>
+        </defs>
+        <g class="circle-inner"></g>
+        <circle id="progress-bar-inner" class="circle-inner__progress-bar" cx="50%" cy="50%" r="15.91549431" />
+        <circle id="relative-strips-hours" cx="50%" cy="50%" r="13.5"></circle>
+        <circle id="relative-strips-minutes" cx="50%" cy="50%" r="13.5"></circle>
+        <g>
+          <text class="circle-inner__agency" x="16.91549431" y="11">Digital-агенство Outlanding</text>
+          <text class="circle-inner__subline-1" x="16.91549431" y="15">Научим</text>
+          <text class="circle-inner__subline-2" x="16.91549431" y="15">Создадим</text>
+          <text class="circle-inner__subline-3" x="16.91549431" y="15">Настроим</text>
+          <text class="circle-inner__line-1" x="16.91549431" y="19">Коммуницировать</text>
+          <text class="circle-inner__line-1" x="16.91549431" y="22">с пользователями</text>
+          <text class="circle-inner__line-2" x="16.91549431" y="15">Имидж в интернет-сети</text>
+          <text class="circle-inner__line-3" x="16.91549431" y="15">Эффективные рекламные кампании</text>
+        </g>
+        </g>
+        <!-- <g id="progress-bar-outer">
+          <circle cx="50%" cy="50%" r="19" />
+          <circle cx="50%" cy="50%" r="17" stroke-dashoffset="105" />
+        </g> -->
+      </svg>
+    </section>
+  </header>
+  <main>
+    <section class="promo__head">
+      <span class="promo__head-number">01</span>
+      <h1>Наши услуги</h1>
+    </section>
+    <section class="categories">
+      <section class="category">
+        <img src="./images/category-1.png" alt="" class="logo">
+        <h1 class="category__head">IT-Консалтинг
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Стратегия компании в интернете</li>
+          <li class="category__list-item">Бизнес-модель сайта</li>
+          <li class="category__list-item">Отраслевые требования к сайту</li>
+          <li class="category__list-item">План развития интернет-ресурса</li>
+          <li class="category__list-item">Технические задания</li>
+        </ul>
+      </section>
+      <section class="category">
+        <img src="./images/category-2.png" alt="" class="logo">
+        <h1 class="category__head">Аналитика
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Анализ эффективности сайта</li>
+          <li class="category__list-item">Анализ целевой аудитории</li>
+          <li class="category__list-item">Аудит рекламных кампаний</li>
+          <li class="category__list-item">SEO-аудит</li>
+          <li class="category__list-item">Веб-аналитика</li>
+        </ul>
+      </section>
+      <section class="category">
+        <img src="./images/category-3.png" alt="" class="logo">
+        <h1 class="category__head">Реклама
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Планирование рекламных кампаний</li>
+          <li class="category__list-item">Контекстная реклама</li>
+          <li class="category__list-item">Реклама в соцсетях</li>
+          <li class="category__list-item">Медийная реклама</li>
+          <li class="category__list-item">Ретаргетинг / Ремастеринг</li>
+        </ul>
+      </section>
+      <section class="category">
+        <p class="promo__text">Мы работаем как
+          <b>"под ключ",</b> так и по
+          <b>отдельным</b> направлениям
+        </p>
+        <svg width="300" height="450" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="Gradient2" x1="0" y1="0" y2="1">
+              <stop class="stop3" offset="0%" />
+              <stop class="stop4" offset="100%" />
+            </linearGradient>
+            <style type="text/css">
+              #rect {
+                stroke: url(#Gradient2);
+                stroke-width: 10;
+              }
+
+              .stop3 {
+                stop-color: #1ebaf4;
+              }
+
+              .stop4 {
+                stop-color: #3d30bf;
+              }
+            </style>
+          </defs>
+          <rect id="rect" width="90%" height="90%" fill="none" x="20" y="20" />
+        </svg>
+        <span class="promo__text-cons">
+          Бесплатная
+          <br>консультанция</span>
+        <span class="promo__text-number">(981) 891-79-88</span>
+      </section>
+      <section class="category">
+        <img src="./images/category-4.png" alt="" class="logo">
+        <h1 class="category__head">Маркетинг
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Аутсорсинг маркетинга</li>
+          <li class="category__list-item">Маркетинговые стратегии</li>
+          <li class="category__list-item">Бренд-платформа</li>
+          <li class="category__list-item">PR в интернете</li>
+          <li class="category__list-item">Вирусный маркетинг</li>
+        </ul>
+      </section>
+      <section class="category">
+        <img src="./images/category-5.png" alt="" class="logo">
+        <h1 class="category__head">Проектирование
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Проектирование сайтов</li>
+          <li class="category__list-item">Проектирование интерфейсов</li>
+          <li class="category__list-item">Информационная архитектура</li>
+          <li class="category__list-item">Пользовательские сценарии</li>
+          <li class="category__list-item">Динамические эффекты</li>
+        </ul>
+      </section>
+      <section class="category">
+        <img src="./images/category-6.png" alt="" class="logo">
+        <h1 class="category__head">Дизайн
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Креативные концепции</li>
+          <li class="category__list-item">Дизайн сайтов</li>
+          <li class="category__list-item">Marketing Kit / Презентации</li>
+          <li class="category__list-item">Продуктовый дизайн</li>
+          <li class="category__list-item">Иллюстрации</li>
+        </ul>
+      </section>
+      <section class="category">
+        <img src="./images/category-7.png" alt="" class="logo">
+        <h1 class="category__head">Программирование и верстка
+          <img class="category__head-arrow" src="./images/main-services-arrow.png" width="59px" height="15px" />
+        </h1>
+        <div class="strip"></div>
+        <ul class="category__list">
+          <li class="category__list-item category__list-item_active">Front-end / Back-end</li>
+          <li class="category__list-item">Разработка сайтов</li>
+          <li class="category__list-item">Интеграция с сервисами</li>
+          <li class="category__list-item">Разработка API</li>
+          <li class="category__list-item">Техническая поддержка</li>
+        </ul>
+      </section>
+    </section>
+    <section class="other-services">
+      <h1 class="other-services__head">Отдельные услуги</h1>
+      <ul class="other-services__list">
+        <ul class="other-services__list">
+          <li class="other-services__list-item other-services__list-item_active">Полное сопровождение</li>
+          <li class="other-services__list-item">Логотипы</li>
+          <li class="other-services__list-item">Завершение проектов</li>
+        </ul>
+        <ul class="other-services__list">
+          <li class="other-services__list-item">Бизнес-стратегия</li>
+
+          <li class="other-services__list-item">Тест подрядчиков</li>
+          <li class="other-services__list-item">Нейминг</li>
+        </ul>
+      </ul>
+    </section>
+  </main>
+</body>
+
+</html>
